@@ -8,16 +8,19 @@ public enum WorkType { Programs, Circuits, Manuals }
 public class Workstation : MonoBehaviour {
 
     public WorkType type;
-    public Sprite[] entries;
-    public List<Task> inputTasks = new List<Task>();
-    public List<Task> outputTasks = new List<Task>();
+    public Material[] entryMaterials;
+    public Renderer[] entryPlanes;
+    public Renderer[] solutionPlanes;
+
+    public Stack<Task> inputTasks = new Stack<Task>();
+    public Stack<Task> outputTasks = new Stack<Task>();
 
     Task currentTask;
     int[] entryOptions;
 
     // Use this for initialization
     void Start () {
-        entryOptions = new int[entries.Length];
+        entryOptions = new int[entryMaterials.Length];
 
         for (int i = 0; i < entryOptions.Length; i++)
         {
@@ -34,8 +37,23 @@ public class Workstation : MonoBehaviour {
 
     IEnumerator AddTask()
     {
-        inputTasks.Add(new Task(type, entryOptions));
+        inputTasks.Push(new Task(type, entryOptions));
+        SetCurrentTask(inputTasks.Pop());
         yield return new WaitForSeconds(Random.Range(3, 5));
         StartCoroutine("AddTask");
+    }
+
+    void SetCurrentTask(Task task)
+    {
+        currentTask = task;
+        UpdateWorkstation();
+    }
+
+    void UpdateWorkstation()
+    {
+        for (int i = 0; i < currentTask.solution.Length; i++)
+        {
+            solutionPlanes[i].material = entryMaterials[currentTask.solution[i]]; 
+        }
     }
 }
