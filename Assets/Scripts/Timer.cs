@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Timer : MonoBehaviour {
+public class Timer {
 
     float seconds;
 
@@ -15,14 +15,9 @@ public class Timer : MonoBehaviour {
     public event TimeUp OnTimeUp;
 
     float secondsTracker;
-
-    // Use this for initialization
-    void Start () {
-		
-	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
         if (running)
         {
             seconds -= Time.deltaTime;
@@ -37,9 +32,7 @@ public class Timer : MonoBehaviour {
             {
                 TimeExpired();
             }
-        }
-
-        
+        }        
 	}
 
     public void StartTimer()
@@ -61,7 +54,8 @@ public class Timer : MonoBehaviour {
 
     void TimeExpired()
     {
-        if (OnTimeUp != null) OnTimeUp();
         StopTimer();
+        if (OnTimeUp != null) OnTimeUp();
+
     }
 }

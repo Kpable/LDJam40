@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        timer = new Timer();
         timer.OnTimeUp += HandleTimeUp;
         timer.OnSecondsChanged += HandleSecondsChanged;
 
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
+        timer.Update();
 	}
 
     void HandleTimeUp()

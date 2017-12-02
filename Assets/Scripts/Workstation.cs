@@ -15,17 +15,19 @@ public class Workstation : MonoBehaviour {
     public GameObject taskObject;
 
 
-    public Stack<Task> inputTasks = new Stack<Task>();
-    public Stack<Task> outputTasks = new Stack<Task>();
+    public Queue<Task> inputTasks = new Queue<Task>();
+    public Queue<Task> outputTasks = new Queue<Task>();
 
-    public delegate void StackPush(StackType val);
-    public event StackPush OnStackPush;
-    public delegate void StackPop(StackType val);
-    public event StackPop OnStackPop;
+    public delegate void QueueEnqueue(StackType val);
+    public event QueueEnqueue OnQueueEnqueue;
+    public delegate void QueueDequeue(StackType val);
+    public event QueueDequeue OnQueueDequeue;
 
 
     Task currentTask;
     int[] entryOptions;
+
+    List<Timer> timerRefs = new List<Timer>();
 
     // Use this for initialization
     void Start () {
@@ -43,7 +45,15 @@ public class Workstation : MonoBehaviour {
 
         StartCoroutine("AddTask");
     }
-	
+
+    private void Update()
+    {
+        for (int i = 0; i < timerRefs.Count; i++)
+        {
+            timerRefs[i].Update();
+        }
+    }
+
     void EntryButtonPressed(int buttonValue)
     {
         Debug.Log("Button pressed: " + buttonValue);
@@ -63,14 +73,14 @@ public class Workstation : MonoBehaviour {
                 currentTask.ValidateEntry();
 
                 // move to output
-                outputTasks.Push(currentTask);
-                if(OnStackPush != null) OnStackPush(StackType.Output);
+                outputTasks.Enqueue(currentTask);
+                if(OnQueueEnqueue != null) OnQueueEnqueue(StackType.Output);
 
                 // load new task
                 if (inputTasks.Count > 0)
                 {
-                    StartTask(inputTasks.Pop());
-                    if (OnStackPop != null) OnStackPop(StackType.Input);
+                    StartTask(inputTasks.Dequeue());
+                    if (OnQueueDequeue != null) OnQueueDequeue(StackType.Input);
                 }
                 else
                 {
@@ -83,25 +93,29 @@ public class Workstation : MonoBehaviour {
 
     IEnumerator AddTask()
     {
-        inputTasks.Push(new Task(type, entryOptions));
+        inputTasks.Enqueue(new Task(type, entryOptions));
         inputTasks.Peek().OnTaskTimedOut += TaskTimedOut;
-        inputTasks.Peek().timer.SetTimer(5, true);
-        if (OnStackPush != null) OnStackPush(StackType.Input);
+        Timer timerRef = inputTasks.Peek().timer;
+        timerRef.SetTimer(5, true);
+        timerRefs.Add(timerRef);
+
+        if (OnQueueEnqueue != null) OnQueueEnqueue(StackType.Input);
 
         if (currentTask == null)
         {
-            StartTask(inputTasks.Pop());
-            if (OnStackPop != null) OnStackPop(StackType.Input);
+            StartTask(inputTasks.Dequeue());
+            if (OnQueueDequeue != null) OnQueueDequeue(StackType.Input);
 
         }
 
-        yield return new WaitForSeconds(Random.Range(3, 5));
+        yield return new WaitForSeconds(Random.Range(3, 3));
         StartCoroutine("AddTask");
     }
 
     void StartTask(Task task)
     {
         currentTask = task;
+        task.timer.StopTimer();
         UpdateWorkstation();
     }
 
@@ -120,13 +134,26 @@ public class Workstation : MonoBehaviour {
             {
                 solutionPlanes[i].material = blankMaterial;
             }
-
         }
 
     }
 
+    // Todo This gets called twice for some reason
+    // Todo Timers are not being updated independantly.
     void TaskTimedOut(Task task)
     {
-        Debug.Log("");
+        if (inputTasks.Contains(task))
+        {
+            Debug.Log("Failing task");
+            Task failedTask = inputTasks.Dequeue();
+            if (OnQueueDequeue != null) OnQueueDequeue(StackType.Input);
+
+            failedTask.status = TaskStatus.Skipped;
+            timerRefs.Remove(failedTask.timer);
+
+            outputTasks.Enqueue(failedTask);
+            if (OnQueueEnqueue != null) OnQueueEnqueue(StackType.Output);
+        }
+
     }
 }

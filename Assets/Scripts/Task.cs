@@ -21,7 +21,9 @@ public class Task {
     {
         this.type = type;
         SetSolution(entryOptions);
+
         timer = new Timer();
+        timer.OnTimeUp += HandleTimeUp;
 
         //Debug.Log("Task created: Type - " + type.ToString() + " Solution - " + solution.ArrayOutput());
     }
@@ -72,8 +74,9 @@ public class Task {
         //Debug.Log("Task Validated: Status: " + status.ToString());
     }
 
-    void TimeExpired()
+    void HandleTimeUp()
     {
+        Debug.Log("Task Timed out");
         if (OnTaskTimedOut != null) OnTaskTimedOut(this);
     }
 }

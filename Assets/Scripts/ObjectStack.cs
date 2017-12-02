@@ -11,7 +11,7 @@ public class ObjectStack : MonoBehaviour {
 
     int spawnPosition = 3;
 
-    Stack<GameObject> gameObjects = new Stack<GameObject>();
+    Queue<GameObject> gameObjects = new Queue<GameObject>();
 	
     // Use this for initialization
 	void Start () {
@@ -25,8 +25,8 @@ public class ObjectStack : MonoBehaviour {
                 break;
         }
 
-        workstation.OnStackPush += AddToStack;
-        workstation.OnStackPop += RemoveFromStack;
+        workstation.OnQueueEnqueue += AddToStack;
+        workstation.OnQueueDequeue += RemoveFromStack;
     }
 
     void AddToStack(StackType type)
@@ -39,7 +39,7 @@ public class ObjectStack : MonoBehaviour {
             GameObject taskObject = Instantiate(workstation.taskObject);
             taskObject.transform.SetParent(transform);
             taskObject.transform.localPosition = spawnPoint;
-            gameObjects.Push(taskObject);
+            gameObjects.Enqueue(taskObject);
         }
     }
 
@@ -48,7 +48,7 @@ public class ObjectStack : MonoBehaviour {
         if (type == this.type)
         {
             spawnPosition--;
-            Destroy(gameObjects.Pop());
+            Destroy(gameObjects.Dequeue());
 
         }
     }
