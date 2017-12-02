@@ -12,11 +12,17 @@ public class Task {
     public int entryIndex; 
     public TaskStatus status;
     public WorkType type;
+    public Timer timer;
+
+    public delegate void TaskTimedOut(Task task);
+    public event TaskTimedOut OnTaskTimedOut;
 
     public Task(WorkType type, int[] entryOptions)
     {
         this.type = type;
         SetSolution(entryOptions);
+        timer = new Timer();
+
         //Debug.Log("Task created: Type - " + type.ToString() + " Solution - " + solution.ArrayOutput());
     }
 
@@ -64,5 +70,10 @@ public class Task {
         status = ((correct) ? TaskStatus.Success : TaskStatus.Partial);
 
         //Debug.Log("Task Validated: Status: " + status.ToString());
+    }
+
+    void TimeExpired()
+    {
+        if (OnTaskTimedOut != null) OnTaskTimedOut(this);
     }
 }

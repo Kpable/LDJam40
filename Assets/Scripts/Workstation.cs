@@ -84,6 +84,8 @@ public class Workstation : MonoBehaviour {
     IEnumerator AddTask()
     {
         inputTasks.Push(new Task(type, entryOptions));
+        inputTasks.Peek().OnTaskTimedOut += TaskTimedOut;
+        inputTasks.Peek().timer.SetTimer(5, true);
         if (OnStackPush != null) OnStackPush(StackType.Input);
 
         if (currentTask == null)
@@ -121,5 +123,10 @@ public class Workstation : MonoBehaviour {
 
         }
 
+    }
+
+    void TaskTimedOut(Task task)
+    {
+        Debug.Log("");
     }
 }
