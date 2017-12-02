@@ -12,10 +12,17 @@ public class Workstation : MonoBehaviour {
     public Material blankMaterial;
     public Renderer[] solutionPlanes;
     public ButtonObject[] entryButtonObjects;
+    public GameObject taskObject;
 
 
     public Stack<Task> inputTasks = new Stack<Task>();
     public Stack<Task> outputTasks = new Stack<Task>();
+
+    public delegate void StackPush(StackType val);
+    public event StackPush OnStackPush;
+    public delegate void StackPop(StackType val);
+    public event StackPop OnStackPop;
+
 
     Task currentTask;
     int[] entryOptions;
@@ -57,10 +64,14 @@ public class Workstation : MonoBehaviour {
 
                 // move to output
                 outputTasks.Push(currentTask);
+                if(OnStackPush != null) OnStackPush(StackType.Output);
 
                 // load new task
                 if (inputTasks.Count > 0)
+                {
                     StartTask(inputTasks.Pop());
+                    if (OnStackPop != null) OnStackPop(StackType.Input);
+                }
                 else
                 {
                     currentTask = null;
@@ -73,10 +84,14 @@ public class Workstation : MonoBehaviour {
     IEnumerator AddTask()
     {
         inputTasks.Push(new Task(type, entryOptions));
+        if (OnStackPush != null) OnStackPush(StackType.Input);
 
-        if(currentTask == null)
+        if (currentTask == null)
+        {
             StartTask(inputTasks.Pop());
+            if (OnStackPop != null) OnStackPop(StackType.Input);
 
+        }
 
         yield return new WaitForSeconds(Random.Range(3, 5));
         StartCoroutine("AddTask");
