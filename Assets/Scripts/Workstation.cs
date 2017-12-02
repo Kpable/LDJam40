@@ -9,8 +9,9 @@ public class Workstation : MonoBehaviour {
 
     public WorkType type;
     public Material[] entryMaterials;
-    public Renderer[] entryPlanes;
     public Renderer[] solutionPlanes;
+    public ButtonObject[] entryButtonObjects;
+
 
     public Stack<Task> inputTasks = new Stack<Task>();
     public Stack<Task> outputTasks = new Stack<Task>();
@@ -27,9 +28,19 @@ public class Workstation : MonoBehaviour {
             entryOptions[i] = i;
         }
 
+        for (int j = 0; j < entryButtonObjects.Length; j++)
+        {
+            entryButtonObjects[j].OnButtonPressed += EntryButtonPressed;
+        }
+
         StartCoroutine("AddTask");
     }
 	
+    void EntryButtonPressed(int buttonValue)
+    {
+        Debug.Log("Button pressed: " + buttonValue);
+    }
+
 	// Update is called once per frame
 	void Update () {
 		
