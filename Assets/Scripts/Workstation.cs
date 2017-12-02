@@ -9,6 +9,7 @@ public class Workstation : MonoBehaviour {
 
     public WorkType type;
     public Material[] entryMaterials;
+    public Material blankMaterial;
     public Renderer[] solutionPlanes;
     public ButtonObject[] entryButtonObjects;
 
@@ -39,22 +40,49 @@ public class Workstation : MonoBehaviour {
     void EntryButtonPressed(int buttonValue)
     {
         Debug.Log("Button pressed: " + buttonValue);
-    }
+        if(currentTask != null)
+        {
+            // Input Entry
+            currentTask.entry[currentTask.entryIndex] = buttonValue;
 
-	// Update is called once per frame
-	void Update () {
-		
-	}
+            //entry entered event
+            
+            // Increment index
+            currentTask.entryIndex++;
+            // Check if we have entered all entries
+            if(currentTask.entryIndex == currentTask.solution.Length)
+            {
+                // Task is done
+                currentTask.ValidateEntry();
+
+                // move to output
+                outputTasks.Push(currentTask);
+
+                // load new task
+                if (inputTasks.Count > 0)
+                    StartTask(inputTasks.Pop());
+                else
+                {
+                    currentTask = null;
+                    UpdateWorkstation();
+                }
+            }
+        }
+    }
 
     IEnumerator AddTask()
     {
         inputTasks.Push(new Task(type, entryOptions));
-        SetCurrentTask(inputTasks.Pop());
+
+        if(currentTask == null)
+            StartTask(inputTasks.Pop());
+
+
         yield return new WaitForSeconds(Random.Range(3, 5));
         StartCoroutine("AddTask");
     }
 
-    void SetCurrentTask(Task task)
+    void StartTask(Task task)
     {
         currentTask = task;
         UpdateWorkstation();
@@ -62,9 +90,21 @@ public class Workstation : MonoBehaviour {
 
     void UpdateWorkstation()
     {
-        for (int i = 0; i < currentTask.solution.Length; i++)
+        if (currentTask != null)
         {
-            solutionPlanes[i].material = entryMaterials[currentTask.solution[i]]; 
+            for (int i = 0; i < currentTask.solution.Length; i++)
+            {
+                solutionPlanes[i].material = entryMaterials[currentTask.solution[i]];
+            }
         }
+        else
+        {
+            for (int i = 0; i < solutionPlanes.Length; i++)
+            {
+                solutionPlanes[i].material = blankMaterial;
+            }
+
+        }
+
     }
 }
