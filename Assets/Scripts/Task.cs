@@ -17,7 +17,7 @@ public class Task {
     {
         this.type = type;
         SetSolution(entryOptions);
-        Debug.Log("Task created: Type - " + type.ToString() + " Solution - " + solution.ArrayOutput());
+        //Debug.Log("Task created: Type - " + type.ToString() + " Solution - " + solution.ArrayOutput());
     }
 
     void SetSolution(int[] entryOptions)
@@ -63,6 +63,6 @@ public class Task {
 
         status = ((correct) ? TaskStatus.Success : TaskStatus.Partial);
 
-        Debug.Log("Task Validated: Status: " + status.ToString());
+        //Debug.Log("Task Validated: Status: " + status.ToString());
     }
 }
