@@ -27,8 +27,6 @@ public class Workstation : MonoBehaviour {
     Task currentTask;
     int[] entryOptions;
 
-    List<Timer> timerRefs = new List<Timer>();
-
     // Use this for initialization
     void Start () {
         entryOptions = new int[entryMaterials.Length];
@@ -48,9 +46,11 @@ public class Workstation : MonoBehaviour {
 
     private void Update()
     {
-        for (int i = 0; i < timerRefs.Count; i++)
+        Task[] tasksArray = inputTasks.ToArray();
+        
+        for (int i = 0; i < tasksArray.Length; i++)
         {
-            timerRefs[i].Update();
+            tasksArray[i].timer.Update();
         }
     }
 
@@ -93,11 +93,13 @@ public class Workstation : MonoBehaviour {
 
     IEnumerator AddTask()
     {
-        inputTasks.Enqueue(new Task(type, entryOptions));
-        inputTasks.Peek().OnTaskTimedOut += TaskTimedOut;
-        Timer timerRef = inputTasks.Peek().timer;
-        timerRef.SetTimer(5, true);
-        timerRefs.Add(timerRef);
+        Task newTask = new Task(type, entryOptions);
+        newTask.OnTaskTimedOut += TaskTimedOut;
+        newTask.timer.SetTimer(5, true);
+        inputTasks.Enqueue(newTask);
+        //inputTasks.Enqueue(new Task(type, entryOptions));
+        //inputTasks.Peek().OnTaskTimedOut += TaskTimedOut;
+        //inputTasks.Peek().timer.SetTimer(5, true);
 
         if (OnQueueEnqueue != null) OnQueueEnqueue(StackType.Input);
 
@@ -105,7 +107,6 @@ public class Workstation : MonoBehaviour {
         {
             StartTask(inputTasks.Dequeue());
             if (OnQueueDequeue != null) OnQueueDequeue(StackType.Input);
-
         }
 
         yield return new WaitForSeconds(Random.Range(3, 3));
@@ -142,18 +143,16 @@ public class Workstation : MonoBehaviour {
     // Todo Timers are not being updated independantly.
     void TaskTimedOut(Task task)
     {
-        if (inputTasks.Contains(task))
-        {
-            Debug.Log("Failing task");
-            Task failedTask = inputTasks.Dequeue();
-            if (OnQueueDequeue != null) OnQueueDequeue(StackType.Input);
+        
+        Debug.Log("Failing task");
+        Task failedTask = inputTasks.Dequeue();
+        if (OnQueueDequeue != null) OnQueueDequeue(StackType.Input);
 
-            failedTask.status = TaskStatus.Skipped;
-            timerRefs.Remove(failedTask.timer);
+        failedTask.status = TaskStatus.Skipped;
 
-            outputTasks.Enqueue(failedTask);
-            if (OnQueueEnqueue != null) OnQueueEnqueue(StackType.Output);
-        }
+        outputTasks.Enqueue(failedTask);
+        if (OnQueueEnqueue != null) OnQueueEnqueue(StackType.Output);
+        
 
     }
 }
