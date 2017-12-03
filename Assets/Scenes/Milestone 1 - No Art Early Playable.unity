@@ -1275,6 +1275,7 @@ MonoBehaviour:
   workstations:
   - {fileID: 328698819}
   clockLabel: {fileID: 1903683736}
+  performanceReview: {fileID: 932986951}
 --- !u!4 &519258952
 Transform:
   m_ObjectHideFlags: 0
@@ -1363,7 +1364,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 520882956}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 932986951}
+        m_MethodName: BackToWork
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &520882956
@@ -1592,6 +1604,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4590655957999468, guid: f7aa012fb34b6fe40948de7e537a131f,
     type: 2}
   m_PrefabInternal: {fileID: 552025844}
+--- !u!114 &571108094 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114671400190844324, guid: 4778dc5cd17f92744b27031e1ee33097,
+    type: 2}
+  m_PrefabInternal: {fileID: 240295144}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &678420303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1796,6 +1814,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224939521109015358, guid: 4778dc5cd17f92744b27031e1ee33097,
     type: 2}
   m_PrefabInternal: {fileID: 762319910}
+--- !u!114 &767988289 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114671400190844324, guid: 4778dc5cd17f92744b27031e1ee33097,
+    type: 2}
+  m_PrefabInternal: {fileID: 459944579}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &773029320
 GameObject:
   m_ObjectHideFlags: 0
@@ -2396,6 +2420,7 @@ GameObject:
   - component: {fileID: 932986948}
   - component: {fileID: 932986950}
   - component: {fileID: 932986949}
+  - component: {fileID: 932986951}
   m_Layer: 5
   m_Name: Perfomance Review Panel
   m_TagString: Untagged
@@ -2459,6 +2484,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 932986947}
+--- !u!114 &932986951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 932986947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 072b964bfcb6b8d4db483330d4f39815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tasksAssigned: {fileID: 1854663404}
+  successText: {fileID: 571108094}
+  partialText: {fileID: 767988289}
+  incompleteText: {fileID: 1983262680}
 --- !u!1 &935190567
 GameObject:
   m_ObjectHideFlags: 0
@@ -4294,6 +4334,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f4141a4e78cff1a4b9e84287c451bf13, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1854663404 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114671400190844324, guid: 4778dc5cd17f92744b27031e1ee33097,
+    type: 2}
+  m_PrefabInternal: {fileID: 241351451}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1856303301
 GameObject:
   m_ObjectHideFlags: 0
@@ -4833,6 +4879,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1230991719}
   m_Script: {fileID: 11500000, guid: 9b97c40cac85b9943a444262d03cd590, type: 3}
+--- !u!114 &1983262680 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114671400190844324, guid: 4778dc5cd17f92744b27031e1ee33097,
+    type: 2}
+  m_PrefabInternal: {fileID: 1658570249}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1997251776
 GameObject:
   m_ObjectHideFlags: 0

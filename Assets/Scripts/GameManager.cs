@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
     public Timer timer;
     public ClockLabel clockLabel;
 
+    public PerformanceReview performanceReview;
+
 	// Use this for initialization
 	void Start () {
         timer = new Timer();
@@ -16,8 +18,6 @@ public class GameManager : MonoBehaviour {
 
         clockLabel.SetTimeRemaining(30);
         timer.SetTimer(30, true);
-
-
     }
 
     // Update is called once per frame
@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour {
     {
         // Open perfomance Review
         Debug.Log("Time is up");
+        Time.timeScale = 0;
+        performanceReview.gameObject.SetActive(true);
+        performanceReview.Review(workstations);
 
     }
 

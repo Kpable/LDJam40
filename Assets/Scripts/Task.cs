@@ -76,7 +76,7 @@ public class Task {
 
     void HandleTimeUp()
     {
-        Debug.Log("Task Timed out");
+        //Debug.Log("Task Timed out");
         if (OnTaskTimedOut != null) OnTaskTimedOut(this);
     }
 }
