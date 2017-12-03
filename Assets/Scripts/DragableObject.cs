@@ -6,6 +6,7 @@ public class DragableObject : MonoBehaviour {
 
     public int entryValue;
     public LayerMask layers;
+    public float dragSpeed = 10f;
     // debug
     Color orig;
     Color pressed = Color.cyan;
@@ -16,9 +17,6 @@ public class DragableObject : MonoBehaviour {
 
     Vector3 position;
     public Vector3 originalPosition;
-
-    bool dragging;
-
 
     private void Start()
     {
@@ -54,7 +52,7 @@ public class DragableObject : MonoBehaviour {
         else position = originalPosition;
         position.x = originalPosition.x;
         //Debug.Log(position);
-        transform.position = Vector3.Lerp(transform.position, position, 6 * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, position, dragSpeed * Time.deltaTime);
         
     }
 }
