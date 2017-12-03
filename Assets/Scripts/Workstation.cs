@@ -139,8 +139,6 @@ public class Workstation : MonoBehaviour {
 
     }
 
-    // Todo This gets called twice for some reason
-    // Todo Timers are not being updated independantly.
     void TaskTimedOut(Task task)
     {
         
@@ -154,5 +152,23 @@ public class Workstation : MonoBehaviour {
         if (OnQueueEnqueue != null) OnQueueEnqueue(StackType.Output);
         
 
+    }
+
+    public void ClearWorkstation()
+    {
+        for (int i = 0; i < inputTasks.Count; i++)
+        {
+            if (OnQueueDequeue != null) OnQueueDequeue(StackType.Input);
+        }
+
+        for (int j = 0; j < outputTasks.Count; j++)
+        {
+            if (OnQueueDequeue != null) OnQueueDequeue(StackType.Output);
+        }
+
+        inputTasks.Clear();
+        outputTasks.Clear();
+        currentTask = null;
+        UpdateWorkstation();
     }
 }

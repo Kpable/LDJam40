@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+    public static GameManager Instance;
 
     public Workstation[] workstations;
     public Timer timer;
@@ -10,8 +11,13 @@ public class GameManager : MonoBehaviour {
 
     public PerformanceReview performanceReview;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+    }
+
+    // Use this for initialization
+    void Start () {
         timer = new Timer();
         timer.OnTimeUp += HandleTimeUp;
         timer.OnSecondsChanged += HandleSecondsChanged;
@@ -38,6 +44,18 @@ public class GameManager : MonoBehaviour {
     void HandleSecondsChanged(int seconds)
     {
         clockLabel.SetTimeRemaining(seconds);
+
+    }
+
+    public void RestartWork()
+    {
+        for (int i = 0; i < workstations.Length; i++)
+        {
+            workstations[i].ClearWorkstation();
+        }
+
+        clockLabel.SetTimeRemaining(30);
+        timer.SetTimer(30, true);
 
     }
 }
