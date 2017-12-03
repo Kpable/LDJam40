@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
 
     public PerformanceReview performanceReview;
 
+    public int reviewCycle = 30;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -22,8 +24,8 @@ public class GameManager : MonoBehaviour {
         timer.OnTimeUp += HandleTimeUp;
         timer.OnSecondsChanged += HandleSecondsChanged;
 
-        clockLabel.SetTimeRemaining(30);
-        timer.SetTimer(30, true);
+        clockLabel.SetTimeRemaining(reviewCycle);
+        timer.SetTimer(reviewCycle, true);
     }
 
     // Update is called once per frame
@@ -54,8 +56,8 @@ public class GameManager : MonoBehaviour {
             workstations[i].ClearWorkstation();
         }
 
-        clockLabel.SetTimeRemaining(30);
-        timer.SetTimer(30, true);
+        clockLabel.SetTimeRemaining(reviewCycle);
+        timer.SetTimer(reviewCycle, true);
 
     }
 }

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonObject : MonoBehaviour {
+public class ButtonObject : EntryObject {
 
-    public int buttonValue;
+    public int entryValue;
 
-    public delegate void ButtonPressed(int val);
-    public event ButtonPressed OnButtonPressed;
+    //public delegate void EntrySubmitted(int val);
+    //public event EntrySubmitted OnEntrySubmitted;
 
     // debug
     Color orig;
@@ -22,8 +22,8 @@ public class ButtonObject : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        if (OnButtonPressed != null) OnButtonPressed(buttonValue);
-
+        //if (OnEntrySubmitted != null) OnEntrySubmitted(entryValue);
+        FireEvent(entryValue);
         //debug
         rend.material.color = pressed;
 

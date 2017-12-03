@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 65387052877646246}
   - component: {fileID: 23536538868116962}
   m_Layer: 0
-  m_Name: Solution Panel
+  m_Name: Program Solution Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

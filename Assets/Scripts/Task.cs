@@ -71,7 +71,7 @@ public class Task {
 
         status = ((correct) ? TaskStatus.Success : TaskStatus.Partial);
 
-        //Debug.Log("Task Validated: Status: " + status.ToString());
+        Debug.Log("Task Validated: Status: " + status.ToString());
     }
 
     void HandleTimeUp()

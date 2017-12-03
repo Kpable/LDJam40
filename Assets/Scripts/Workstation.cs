@@ -11,7 +11,7 @@ public class Workstation : MonoBehaviour {
     public Material[] entryMaterials;
     public Material blankMaterial;
     public Renderer[] solutionPlanes;
-    public ButtonObject[] entryButtonObjects;
+    public EntryObject[] entryButtonObjects;
     public GameObject taskObject;
 
 
@@ -22,6 +22,9 @@ public class Workstation : MonoBehaviour {
     public event QueueEnqueue OnQueueEnqueue;
     public delegate void QueueDequeue(StackType val);
     public event QueueDequeue OnQueueDequeue;
+
+    public delegate void TaskComplete();
+    public event TaskComplete OnTaskComplete;
 
 
     Task currentTask;
@@ -38,7 +41,7 @@ public class Workstation : MonoBehaviour {
 
         for (int j = 0; j < entryButtonObjects.Length; j++)
         {
-            entryButtonObjects[j].OnButtonPressed += EntryButtonPressed;
+            entryButtonObjects[j].OnEntrySubmitted += EntryButtonPressed;
         }
 
         StartCoroutine("AddTask");
@@ -54,23 +57,28 @@ public class Workstation : MonoBehaviour {
         }
     }
 
-    void EntryButtonPressed(int buttonValue)
+    void EntryButtonPressed(int slotValue, int entryValue)
     {
-        Debug.Log("Button pressed: " + buttonValue);
+        //Debug.Log("Button pressed: " + buttonValue);
         if(currentTask != null)
         {
             // Input Entry
-            currentTask.entry[currentTask.entryIndex] = buttonValue;
+            if(slotValue < 0)
+                currentTask.entry[currentTask.entryIndex] = entryValue;
+            else
+                currentTask.entry[slotValue] = entryValue;
 
             //entry entered event
-            
+
             // Increment index
+            // We still want to do this if the slot is not provided
             currentTask.entryIndex++;
             // Check if we have entered all entries
             if(currentTask.entryIndex == currentTask.solution.Length)
             {
                 // Task is done
                 currentTask.ValidateEntry();
+                if (OnTaskComplete != null) OnTaskComplete();
 
                 // move to output
                 outputTasks.Enqueue(currentTask);
@@ -97,9 +105,6 @@ public class Workstation : MonoBehaviour {
         newTask.OnTaskTimedOut += TaskTimedOut;
         newTask.timer.SetTimer(5, true);
         inputTasks.Enqueue(newTask);
-        //inputTasks.Enqueue(new Task(type, entryOptions));
-        //inputTasks.Peek().OnTaskTimedOut += TaskTimedOut;
-        //inputTasks.Peek().timer.SetTimer(5, true);
 
         if (OnQueueEnqueue != null) OnQueueEnqueue(StackType.Input);
 
@@ -109,7 +114,7 @@ public class Workstation : MonoBehaviour {
             if (OnQueueDequeue != null) OnQueueDequeue(StackType.Input);
         }
 
-        yield return new WaitForSeconds(Random.Range(3, 3));
+        yield return new WaitForSeconds(Random.Range(2, 5));
         StartCoroutine("AddTask");
     }
 
@@ -150,8 +155,6 @@ public class Workstation : MonoBehaviour {
 
         outputTasks.Enqueue(failedTask);
         if (OnQueueEnqueue != null) OnQueueEnqueue(StackType.Output);
-        
-
     }
 
     public void ClearWorkstation()
