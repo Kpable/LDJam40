@@ -6,8 +6,13 @@ using UnityEngine.UI;
 
 public class PerformanceReview : MonoBehaviour {
 
-    public Text tasksAssigned, successText, partialText, incompleteText;
 
+    public Transform resultsPanel;
+    public GameObject workstationResults;
+
+    public Text chanceOfPromotion;
+
+    int promotionChance = 0;
     
 	// Use this for initialization
 	void Start () {
@@ -16,32 +21,40 @@ public class PerformanceReview : MonoBehaviour {
 	
     public void Review(Workstation[] workstations)
     {
-        Task[] assignedTasks = workstations[0].outputTasks.ToArray();
-        tasksAssigned.text += " " + assignedTasks.Length;
-
-        int success = 0, partial = 0, incomplete = 0;
-
-        for (int i = 0; i < assignedTasks.Length; i++)
+        for (int i = 0; i < workstations.Length; i++)
         {
-            switch (assignedTasks[i].status)
-            {
-                case TaskStatus.Skipped:
-                    incomplete++;
-                    break;
-                case TaskStatus.Partial:
-                    partial++;
-                    break;
-                case TaskStatus.Success:
-                    success++;
-                    break;
-                default:
-                    break;
-            }
-        }
+            Task[] assignedTasks = workstations[i].outputTasks.ToArray();
 
-        successText.text += " " + success;
-        partialText.text += " " + partial;
-        incompleteText.text += " " + incomplete;
+            GameObject workstationResultsPanel = Instantiate(workstationResults);
+            workstationResultsPanel.transform.SetParent(resultsPanel, false);
+            WorkstationResults wr = workstationResultsPanel.GetComponent<WorkstationResults>();
+
+            int success = 0, partial = 0, incomplete = 0;
+
+            for (int j = 0; j < assignedTasks.Length; j++)
+            {
+                switch (assignedTasks[j].status)
+                {
+                    case TaskStatus.Skipped:
+                        incomplete++;
+                        promotionChance-=3;
+                        break;
+                    case TaskStatus.Partial:
+                        partial++;
+                        promotionChance++;
+                        break;
+                    case TaskStatus.Success:
+                        promotionChance += 2;
+                        success++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            wr.SetText(workstations[i].type, assignedTasks.Length, success, partial, incomplete);
+            
+        }
     }
 
     public void BackToWork()
