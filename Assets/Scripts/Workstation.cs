@@ -103,7 +103,7 @@ public class Workstation : MonoBehaviour {
     {
         Task newTask = new Task(type, entryOptions);
         newTask.OnTaskTimedOut += TaskTimedOut;
-        newTask.timer.SetTimer(5, true);
+        newTask.timer.SetTimer(Random.Range(5, 15), true);
         inputTasks.Enqueue(newTask);
 
         if (OnQueueEnqueue != null) OnQueueEnqueue(StackType.Input);

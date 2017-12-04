@@ -10,7 +10,7 @@ public class PerformanceReview : MonoBehaviour {
     public Transform resultsPanel;
     public GameObject workstationResults;
 
-    public Text chanceOfPromotion;
+    public Text chanceOfPromotion, status;
 
     int promotionChance = 0;
     
@@ -21,6 +21,13 @@ public class PerformanceReview : MonoBehaviour {
 	
     public void Review(Workstation[] workstations)
     {
+        promotionChance = 0;
+
+        for (int j = 0; j < resultsPanel.childCount; j++)
+        {
+            Destroy(resultsPanel.GetChild(j).gameObject);
+        }
+
         for (int i = 0; i < workstations.Length; i++)
         {
             Task[] assignedTasks = workstations[i].outputTasks.ToArray();
@@ -53,7 +60,24 @@ public class PerformanceReview : MonoBehaviour {
             }
 
             wr.SetText(workstations[i].type, assignedTasks.Length, success, partial, incomplete);
-            
+            chanceOfPromotion.text = "Chance of " + ((promotionChance > 0) ? "Promotion: " : "Getting Fired: ") + Mathf.Abs(promotionChance).ToString() + "%";
+            chanceOfPromotion.color = ((promotionChance > 0) ? Color.green : Color.red);
+
+            if (promotionChance > 0)
+            {
+                if (UnityEngine.Random.value < (Mathf.Abs(promotionChance) / 100f))
+                    status.text = "You got the promtion! Congratulations!";
+                else
+                    status.text = "You're doing great work! Keep it up!";
+            }
+            else
+            {
+                if (UnityEngine.Random.value < (Mathf.Abs(promotionChance) / 100f))
+                    status.text = "You missed too much work, your fired!";
+                else
+                    status.text = "You're really trying but you need to work harder!";
+
+            }
         }
     }
 
