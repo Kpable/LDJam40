@@ -86,6 +86,6 @@ public class PerformanceReview : MonoBehaviour {
         Time.timeScale = 1;
         gameObject.SetActive(false);
 
-        GameManager.Instance.RestartWork();
+        //GameManager.Instance.RestartWork();
     }
 }

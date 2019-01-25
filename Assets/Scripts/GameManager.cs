@@ -1,22 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Kpable.Utilities;
+using Kpable.Mechanics;
 
-public class GameManager : MonoBehaviour {
-    public static GameManager Instance;
+public class GameManager : SingletonBehaviour<GameManager> {
 
-    public Workstation[] workstations;
+    public ObservedStringVariable timeText;
+
+    //public Workstation[] workstations;
     public Timer timer;
-    public ClockLabel clockLabel;
+    //public ClockLabel clockLabel;
 
     public PerformanceReview performanceReview;
 
-    public int reviewCycle = 30;
-
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-    }
+    public int reviewCycle = 48;
+    public WorkDay[] days;
 
     // Use this for initialization
     void Start () {
@@ -24,8 +23,15 @@ public class GameManager : MonoBehaviour {
         timer.OnTimeUp += HandleTimeUp;
         timer.OnSecondsChanged += HandleSecondsChanged;
 
-        clockLabel.SetTimeRemaining(reviewCycle);
+        //clockLabel.SetTimeRemaining(reviewCycle);
         timer.SetTimer(reviewCycle, true);
+
+        Invoke("TimeChange", 3f);
+    }
+
+    public void TimeChange()
+    {
+        timeText.Value = "10:00";
     }
 
     // Update is called once per frame
@@ -37,27 +43,29 @@ public class GameManager : MonoBehaviour {
     {
         // Open perfomance Review
         Debug.Log("Time is up");
-        Time.timeScale = 0;
-        performanceReview.gameObject.SetActive(true);
-        performanceReview.Review(workstations);
+        //Time.timeScale = 0;
+        //performanceReview.gameObject.SetActive(true);
+        //performanceReview.Review(workstations);
 
     }
 
     void HandleSecondsChanged(int seconds)
     {
-        clockLabel.SetTimeRemaining(seconds);
+        //clockLabel.SetTimeRemaining(seconds);
 
     }
 
-    public void RestartWork()
-    {
-        for (int i = 0; i < workstations.Length; i++)
-        {
-            workstations[i].ClearWorkstation();
-        }
+    //public void RestartWork()
+    //{
+    //    for (int i = 0; i < workstations.Length; i++)
+    //    {
+    //        workstations[i].ClearWorkstation();
+    //    }
 
-        clockLabel.SetTimeRemaining(reviewCycle);
-        timer.SetTimer(reviewCycle, true);
+    //    clockLabel.SetTimeRemaining(reviewCycle);
+    //    timer.SetTimer(reviewCycle, true);
 
-    }
+    //}
 }
+
+public enum Module { Programming, LogicArray }
