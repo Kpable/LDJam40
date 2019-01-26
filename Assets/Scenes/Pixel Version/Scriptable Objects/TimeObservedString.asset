@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fce4727de4225438068bd56f0dd02f, type: 3}
   m_Name: TimeObservedString
   m_EditorClassIdentifier: 
-  value: 9:00
+  value: 08:00

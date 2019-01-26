@@ -16,8 +16,6 @@ public class Timer {
     public event TimeUp OnTimeUp;
 
     float secondsTracker;
-
-    TimeSpan time; 
 	
 	// Update is called once per frame
 	public void Update () {
@@ -30,6 +28,7 @@ public class Timer {
             if(secondsTracker - seconds >= 1 && OnSecondsChanged != null)
             {
                 OnSecondsChanged((int)Mathf.Ceil(seconds));
+                secondsTracker = seconds;
             }
 
             if (seconds <= 0)
@@ -39,30 +38,26 @@ public class Timer {
         }        
 	}
 
-    public void StartTimer()
+    public void Start()
     {
         running = true;
     }
 
-    public void StopTimer()
+    public void Stop()
     {
         running = false;
     }
 
-    public void SetTimer(int seconds, bool start=false)
+    public void Set(int seconds, bool start=false)
     {
-        //time = new TimeSpan(seconds * 10000000);
-        time = new TimeSpan(8, 0,0);
-        time.Add(new TimeSpan(0, 10, 0));
-        Debug.Log("time set to: " + string.Format("{0:D2}:{1:D2}:{2:D2}", time.Hours, time.Minutes, time.Seconds));
         this.seconds = seconds;
         secondsTracker = seconds;
-        if (start) StartTimer();
+        if (start) Start();
     }
 
     void TimeExpired()
     {
-        StopTimer();
+        Stop();
         if (OnTimeUp != null) OnTimeUp();
 
     }
