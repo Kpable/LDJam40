@@ -4,6 +4,7 @@ using UnityEngine;
 using Kpable.Utilities;
 using Kpable.Mechanics;
 using System; 
+using System.Linq;
 
 public class GameManager : SingletonBehaviour<GameManager> {
 
@@ -23,6 +24,10 @@ public class GameManager : SingletonBehaviour<GameManager> {
 
     public Transform incoming, currentItem;
 
+    public DriveCanvasElement[] drives;
+
+    bool ejection;
+
     // Use this for initialization
     void Start () {
         timer = new Timer();
@@ -34,6 +39,12 @@ public class GameManager : SingletonBehaviour<GameManager> {
 
 
         StartDay();
+
+        foreach (var item in drives)
+        {
+            item.OnButtonPress += HandleItemPress;
+            item.OnDriveEject += HandleDriveEject;
+        }
     }
 
     // Update is called once per frame
@@ -99,7 +110,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
     {
         timeText.Value = "";
         yield return new WaitForSeconds(0.5f);
-        timeText.Value = string.Format("{0:D2}:{1:D2}", ((time.Hours > 12) ? time.Hours - 12 : time.Hours), time.Minutes);
+        //timeText.Value = string.Format("{0:D2}:{1:D2}", ((time.Hours > 12) ? time.Hours - 12 : time.Hours), time.Minutes);
         yield return new WaitForSeconds(0.5f);
         StartCoroutine("BlinkText");
     }
@@ -114,6 +125,27 @@ public class GameManager : SingletonBehaviour<GameManager> {
             item.anchorMax = Vector2.one * 0.5f;
             item.localPosition = Vector2.zero;
         }
+    }
+
+    void HandleItemPress(Drive item)
+    {
+        if (currentItem.childCount > 0)
+        {
+            var cart = currentItem.GetChild(0).GetComponent<CartridgeCanvasElement>();
+            if (item.SupportedCartridges.Contains(cart.Model) && !ejection)
+            {
+                drives[0].Inserted = true;
+                currentItem.GetChild(0).gameObject.SetActive(false);
+            }
+            else
+                ejection = false;
+        }
+    }
+
+    void HandleDriveEject()
+    {
+        currentItem.GetChild(0).gameObject.SetActive(true);
+        ejection = true;
     }
 }
 

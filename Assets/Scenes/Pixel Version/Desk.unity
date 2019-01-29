@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 155740673}
   - component: {fileID: 155740675}
   - component: {fileID: 155740674}
+  - component: {fileID: 155740676}
   m_Layer: 0
   m_Name: Floppy Disk (1)
   m_TagString: Untagged
@@ -261,6 +262,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155740672}
   m_CullTransparentMesh: 0
+--- !u!114 &155740676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155740672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4beea40d826567d4cb6fb0329130e44f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 11400000, guid: 873cbd1e3962f234f9a944d47335ec35, type: 2}
 --- !u!1 &201299948
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,6 +628,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 081a0b3e24cf48b43addee7ea9af98e3, type: 2}
   incoming: {fileID: 1481302925}
   currentItem: {fileID: 1258007844}
+  drives:
+  - {fileID: 1862400542}
 --- !u!4 &275200109
 Transform:
   m_ObjectHideFlags: 0
@@ -2686,7 +2702,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 48.68, y: 0}
+  m_AnchoredPosition: {x: 48.678932, y: 0}
   m_SizeDelta: {x: 0, y: 55.51}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1481302926
@@ -3206,7 +3222,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 269594281}
   m_Direction: 0
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.9997711
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3330,7 +3346,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1862400542}
-        m_MethodName: HandleButton
+        m_MethodName: ButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3388,14 +3404,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1862400537}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87ca8690cc0f519459245353b8bfb791, type: 3}
+  m_Script: {fileID: 11500000, guid: 30ddc6330779c3f4dbc7a483db85be10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 11400000, guid: 19997289b770f114cb3a78107a597fe6, type: 2}
   driveImage: {fileID: 1862400540}
-  off: {fileID: 21300000, guid: 45c474f2a30fb5e428fe7e08d4ec1f62, type: 3}
-  on: {fileID: 21300000, guid: 38b52365a7676ba4c9aead8cf97fa669, type: 3}
-  offInserted: {fileID: 21300000, guid: af06e5db9a261794cac62152fa7a911e, type: 3}
-  onInserted: {fileID: 21300000, guid: 45c474f2a30fb5e428fe7e08d4ec1f62, type: 3}
 --- !u!1 &1983529757
 GameObject:
   m_ObjectHideFlags: 0

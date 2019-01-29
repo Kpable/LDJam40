@@ -2,17 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Cartridge
+[CreateAssetMenu(menuName = "Kpable/Performance Review/Cartridge", fileName = "New Cartridge")]
+public class Cartridge : ScriptableObject
 {
-    public Problem[] problems;
-}
-
-[System.Serializable]
-public class Problem
-{
-    public Module module;
-    public int answers;
-    public int solutions;
 
 }
