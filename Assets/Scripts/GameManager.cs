@@ -14,12 +14,14 @@ public class GameManager : SingletonBehaviour<GameManager> {
     TimeSpan time;
     //public ClockLabel clockLabel;
 
-    public PerformanceReview performanceReview;
+    //public PerformanceReview performanceReview;
 
     public int dayCycle = 48; // Seconds
     public WorkDay[] days;
 
     private bool gameIsPaused = false;
+
+    public Transform incoming, currentItem;
 
     // Use this for initialization
     void Start () {
@@ -30,12 +32,21 @@ public class GameManager : SingletonBehaviour<GameManager> {
         time = new TimeSpan(8, 0, 0);
         timeText.Value = string.Format("{0:D2}:{1:D2}", ((time.Hours > 12) ? time.Hours - 12 : time.Hours), time.Minutes);
 
+
+        StartDay();
     }
 
     // Update is called once per frame
     void Update () {
         timer.Update();
 	}
+
+    public void StartDay()
+    {
+        Debug.Log("Starting " + days[0]);
+
+
+    }
 
     void HandleTimeUp()
     {
@@ -92,6 +103,19 @@ public class GameManager : SingletonBehaviour<GameManager> {
         yield return new WaitForSeconds(0.5f);
         StartCoroutine("BlinkText");
     }
+
+    public void NextCartridge()
+    {
+        if(incoming.childCount > 0)
+        {
+            var item = (RectTransform)incoming.GetChild(0);
+            item.SetParent(currentItem, false);
+            item.anchorMin = Vector2.one * 0.5f;
+            item.anchorMax = Vector2.one * 0.5f;
+            item.localPosition = Vector2.zero;
+        }
+    }
 }
 
 public enum Module { Programming, LogicArray }
+public enum CartridgeType { Floppy }
