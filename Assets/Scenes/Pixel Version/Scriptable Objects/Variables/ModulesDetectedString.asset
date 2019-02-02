@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bd3dabe7ac7eac47859d2b648d1e2fb, type: 3}
-  m_Name: TimeString
+  m_Script: {fileID: 11500000, guid: f4fce4727de4225438068bd56f0dd02f, type: 3}
+  m_Name: ModulesDetectedString
   m_EditorClassIdentifier: 
-  value: 8:00
+  value: Modules Detected

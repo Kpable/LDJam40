@@ -4,7 +4,6 @@ using UnityEngine;
 using Kpable.Utilities;
 using Kpable.Mechanics;
 using System; 
-using System.Linq;
 
 public class GameManager : SingletonBehaviour<GameManager> {
 
@@ -22,12 +21,6 @@ public class GameManager : SingletonBehaviour<GameManager> {
 
     private bool gameIsPaused = false;
 
-    public Transform incoming, currentItem;
-
-    public DriveCanvasElement[] drives;
-
-    bool ejection;
-
     // Use this for initialization
     void Start () {
         timer = new Timer();
@@ -35,16 +28,12 @@ public class GameManager : SingletonBehaviour<GameManager> {
         timer.OnSecondsChanged += HandleSecondsChanged;
         timer.Set(dayCycle, true);
         time = new TimeSpan(8, 0, 0);
-        timeText.Value = string.Format("{0:D2}:{1:D2}", ((time.Hours > 12) ? time.Hours - 12 : time.Hours), time.Minutes);
+        //timeText.Value = string.Format("{0:D2}:{1:D2}", ((time.Hours > 12) ? time.Hours - 12 : time.Hours), time.Minutes);
 
 
         StartDay();
 
-        foreach (var item in drives)
-        {
-            item.OnButtonPress += HandleItemPress;
-            item.OnDriveEject += HandleDriveEject;
-        }
+       
     }
 
     // Update is called once per frame
@@ -75,7 +64,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
     {
         //time = new TimeSpan(seconds * 10000000);
         time = time.Add(new TimeSpan(0, 5, 0));
-        Debug.Log("time set to: " + string.Format("{0:D2}:{1:D2}:{2:D2}", time.Hours, time.Minutes, time.Seconds));
+        //Debug.Log("time set to: " + string.Format("{0:D2}:{1:D2}:{2:D2}", time.Hours, time.Minutes, time.Seconds));
         timeText.Value = string.Format("{0:D2}:{1:D2}", ((time.Hours > 12) ? time.Hours - 12 : time.Hours), time.Minutes);
     }
 
@@ -115,38 +104,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
         StartCoroutine("BlinkText");
     }
 
-    public void NextCartridge()
-    {
-        if(incoming.childCount > 0)
-        {
-            var item = (RectTransform)incoming.GetChild(0);
-            item.SetParent(currentItem, false);
-            item.anchorMin = Vector2.one * 0.5f;
-            item.anchorMax = Vector2.one * 0.5f;
-            item.localPosition = Vector2.zero;
-        }
-    }
-
-    void HandleItemPress(Drive item)
-    {
-        if (currentItem.childCount > 0)
-        {
-            var cart = currentItem.GetChild(0).GetComponent<CartridgeCanvasElement>();
-            if (item.SupportedCartridges.Contains(cart.Model) && !ejection)
-            {
-                drives[0].Inserted = true;
-                currentItem.GetChild(0).gameObject.SetActive(false);
-            }
-            else
-                ejection = false;
-        }
-    }
-
-    void HandleDriveEject()
-    {
-        currentItem.GetChild(0).gameObject.SetActive(true);
-        ejection = true;
-    }
+   
 }
 
 public enum Module { Programming, LogicArray }
