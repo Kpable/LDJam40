@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47e23aa010062f84ca8513f50014a443, type: 3}
-  m_Name: Floppy Disk
+  m_Script: {fileID: 11500000, guid: f4fce4727de4225438068bd56f0dd02f, type: 3}
+  m_Name: ErrorsDetectedString
   m_EditorClassIdentifier: 
-  ScanTime: 3
-  SupportedModules:
-  - {fileID: 11400000, guid: ec29223ed1d291444819f8c1a0b393e3, type: 2}
+  value: Errors Detected

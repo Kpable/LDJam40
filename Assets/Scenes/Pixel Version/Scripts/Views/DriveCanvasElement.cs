@@ -12,10 +12,10 @@ public class DriveCanvasElement : CanvasElement<Drive>
     private bool _on = false;
     private bool _inserted = false;
 
-    public delegate void PowerStateChange(DrivePowerState state);
+    public delegate void PowerStateChange(DrivePowerState state, Drive item);
     public PowerStateChange OnPowerStateChange;
 
-    public delegate void InsertionStateChange(DriveInsertionState state);
+    public delegate void InsertionStateChange(DriveInsertionState state, Drive item);
     public InsertionStateChange OnInsertionStateChange;
 
     public bool On
@@ -35,7 +35,7 @@ public class DriveCanvasElement : CanvasElement<Drive>
             driveImage.sprite = ((On) ? model.On : model.Off);
 
             if (OnPowerStateChange != null)
-                OnPowerStateChange(((On) ? DrivePowerState.On : DrivePowerState.Off));
+                OnPowerStateChange(((On) ? DrivePowerState.On : DrivePowerState.Off), model);
         }
         private get { return _on; }
     }
@@ -60,7 +60,7 @@ public class DriveCanvasElement : CanvasElement<Drive>
             
 
             if (OnInsertionStateChange != null)
-                OnInsertionStateChange(model.CurrentInsertionState);
+                OnInsertionStateChange(model.CurrentInsertionState, model);
         }
         private get { return _inserted; }
     }

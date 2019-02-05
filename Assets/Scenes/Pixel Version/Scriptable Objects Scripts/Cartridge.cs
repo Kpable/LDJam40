@@ -5,5 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Kpable/Performance Review/Cartridge", fileName = "New Cartridge")]
 public class Cartridge : ScriptableObject
 {
-
+    public float ScanTime;
+    public Module[] SupportedModules;
 }

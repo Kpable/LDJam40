@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Kpable.Mechanics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WorkDesk : MonoBehaviour
 {
@@ -13,8 +14,11 @@ public class WorkDesk : MonoBehaviour
     bool ejection;
     int modulesConnected = 0;
     int maxModulesSupported = 1;
-    public ObservedStringVariable modulesText;
-    
+    public ObservedStringVariable modulesText, errorsText;
+    public Slider slider;
+    Timer timer = new Timer();
+    public GameObject cartridgePrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +28,17 @@ public class WorkDesk : MonoBehaviour
             item.OnPowerStateChange += HandleDrivePowerStateChange;
             item.OnInsertionStateChange += HandleDriveInsertionStateChange;
         }
+
+        slider.maxValue = 3;
+        slider.value = 0;
+    }
+    private void Update()
+    {
+        timer.Update();
     }
 
-    private void HandleDriveInsertionStateChange(DriveInsertionState state)
+
+    private void HandleDriveInsertionStateChange(DriveInsertionState state, Drive item)
     {
         switch (state)
         {
@@ -36,14 +48,48 @@ public class WorkDesk : MonoBehaviour
                 break;
             case DriveInsertionState.Inserted:
                 currentItem.GetChild(0).gameObject.SetActive(false);
-
+                StartScanning(item);
                 break;
             default:
                 break;
         }
     }
 
-    private void HandleDrivePowerStateChange(DrivePowerState state)
+    internal void LoadDay(WorkDay workDay)
+    {
+        foreach (var item in workDay.cartridges)
+        {
+            var go = Instantiate(cartridgePrefab);
+            go.transform.SetParent(incoming, false);
+        }
+    }
+
+    private void StartScanning(Drive item)
+    {
+        Debug.Log("Begining Scan");
+        timer.OnSecondsChanged += UpdateSlider;
+        timer.OnTimeUp += ScanComplete;
+        timer.Set(item.SupportedCartridges[0].ScanTime, true);
+    }
+
+    private void ScanComplete()
+    {
+        Debug.Log("Scan Complete");
+        ReportErrors();
+    }
+
+    private void ReportErrors()
+    {
+        Debug.Log("Report errors");
+        errorsText.Value = "Erros dectected: 0";
+    }
+
+    void UpdateSlider( int prog)
+    {
+        slider.value = 3 - prog;
+    }
+
+    private void HandleDrivePowerStateChange(DrivePowerState state, Drive item)
     {
         switch (state)
         {
@@ -66,7 +112,7 @@ public class WorkDesk : MonoBehaviour
 
     public void TakeFromIncoming()
     {
-        if (incoming.childCount > 0)
+        if (incoming.childCount > 0 && currentItem.childCount == 0)
         {
             var item = (RectTransform)incoming.GetChild(0);
             item.SetParent(currentItem, false);

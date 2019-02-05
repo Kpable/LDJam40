@@ -33,6 +33,7 @@ public class Timer {
 
             if (seconds <= 0)
             {
+                OnSecondsChanged((int)Mathf.Ceil(seconds));
                 TimeExpired();
             }
         }        
@@ -49,6 +50,11 @@ public class Timer {
     }
 
     public void Set(int seconds, bool start=false)
+    {
+        Set((float)seconds, start);
+    }
+
+    public void Set(float seconds, bool start = false)
     {
         this.seconds = seconds;
         secondsTracker = seconds;

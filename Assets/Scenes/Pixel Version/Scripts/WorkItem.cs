@@ -11,7 +11,7 @@ public class WorkItem
 [System.Serializable]
 public class Problem
 {
-    public Module module;
+    public ModuleType module;
     public int answers;
     public int solutions;
 

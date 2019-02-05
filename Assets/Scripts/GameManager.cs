@@ -21,6 +21,8 @@ public class GameManager : SingletonBehaviour<GameManager> {
 
     private bool gameIsPaused = false;
 
+    public WorkDesk workDesk;
+
     // Use this for initialization
     void Start () {
         timer = new Timer();
@@ -44,7 +46,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
     public void StartDay()
     {
         Debug.Log("Starting " + days[0]);
-
+        workDesk.LoadDay(days[0]);
 
     }
 
@@ -86,6 +88,8 @@ public class GameManager : SingletonBehaviour<GameManager> {
         {
             timer.Start();
             StopCoroutine("BlinkText");
+            timeText.Value = string.Format("{0:D2}:{1:D2}", ((time.Hours > 12) ? time.Hours - 12 : time.Hours), time.Minutes);
+
         }
         else
         {
@@ -99,7 +103,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
     {
         timeText.Value = "";
         yield return new WaitForSeconds(0.5f);
-        //timeText.Value = string.Format("{0:D2}:{1:D2}", ((time.Hours > 12) ? time.Hours - 12 : time.Hours), time.Minutes);
+        timeText.Value = string.Format("{0:D2}:{1:D2}", ((time.Hours > 12) ? time.Hours - 12 : time.Hours), time.Minutes);
         yield return new WaitForSeconds(0.5f);
         StartCoroutine("BlinkText");
     }
@@ -107,5 +111,5 @@ public class GameManager : SingletonBehaviour<GameManager> {
    
 }
 
-public enum Module { Programming, LogicArray }
+public enum ModuleType { Programming, LogicArray }
 public enum CartridgeType { Floppy }
