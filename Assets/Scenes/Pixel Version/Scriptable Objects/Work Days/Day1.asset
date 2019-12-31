@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Day1
   m_EditorClassIdentifier: 
   cartridges:
-  - problems: []
+  - problems:
+    - module: 0
+      answers: 0
+      solutions: 0
   - problems: []
   - problems: []
   - problems: []

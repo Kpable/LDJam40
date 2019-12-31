@@ -18,6 +18,8 @@ public class DriveCanvasElement : CanvasElement<Drive>
     public delegate void InsertionStateChange(DriveInsertionState state, Drive item);
     public InsertionStateChange OnInsertionStateChange;
 
+    List<CartridgeCanvasElement> InsertedCarts = new List<CartridgeCanvasElement>();
+
     public bool On
     {
         set
@@ -55,9 +57,7 @@ public class DriveCanvasElement : CanvasElement<Drive>
             {
                 model.CurrentInsertionState = DriveInsertionState.Ejected;
                 On = false;
-            }
-
-            
+            }            
 
             if (OnInsertionStateChange != null)
                 OnInsertionStateChange(model.CurrentInsertionState, model);
@@ -87,10 +87,11 @@ public class DriveCanvasElement : CanvasElement<Drive>
         
     }
 
-    public void InsertDrive()
+    public void InsertCartidge(CartridgeCanvasElement cart)
     {
         inserting = true;
         Inserted = true;
+        InsertedCarts.Add(cart);
     }
 
     void Start()
