@@ -29,6 +29,94 @@
     </CollectionProperty>
     <BooleanProperty Name="ViolationsAsErrors">True</BooleanProperty>
   </GlobalSettings>
+  <Parsers>
+    <Parser ParserId="StyleCop.CSharp.CsParser">
+      <ParserSettings>
+        <CollectionProperty Name="GeneratedFileFilters">
+          <Value>[^a-z ]MVCBehaviour.cs</Value>
+          <Value>[^a-z ]NineSquareBehavior.cs</Value>
+          <Value>[^a-z ]RectangleBehavior.cs</Value>
+          <Value>[^a-z ]BaseSceneCamera.cs</Value>
+          <Value>[^a-z ]BaseSceneManager.cs</Value>
+          <Value>[^a-z ]Health.cs</Value>
+          <Value>[^a-z ]ObservedValue.cs</Value>
+          <Value>[^a-z ]ObservedValueScriptableObject.cs</Value>
+          <Value>[^a-z ]Controller.cs</Value>
+          <Value>[^a-z ]ControllerFactory.cs</Value>
+          <Value>[^a-z ]IController.cs</Value>
+          <Value>[^a-z ]IModel.cs</Value>
+          <Value>[^a-z ]IView.cs</Value>
+          <Value>[^a-z ]MenuView.cs</Value>
+          <Value>[^a-z ]Model.cs</Value>
+          <Value>[^a-z ]View.cs</Value>
+          <Value>[^a-z ]Transitioner.cs</Value>
+          <Value>[^a-z ]AstarPathfinding.cs</Value>
+          <Value>[^a-z ]PathfindingAlgorithm.cs</Value>
+          <Value>[^a-z ]SteeringBehaviorScriptableObject.cs</Value>
+          <Value>[^a-z ]FloatVariable.cs</Value>
+          <Value>[^a-z ]IntVariable.cs</Value>
+          <Value>[^a-z ]ObservedStringVariable.cs</Value>
+          <Value>[^a-z ]ObservedVariable.cs</Value>
+          <Value>[^a-z ]RuntimeSet.cs</Value>
+          <Value>[^a-z ]StringVariable.cs</Value>
+          <Value>[^a-z ]Variable.cs</Value>
+          <Value>[^a-z ]EasingFunctions.cs</Value>
+          <Value>[^a-z ]FourDirectionalMovement.cs</Value>
+          <Value>[^a-z ]IInputListener.cs</Value>
+          <Value>[^a-z ]IMovement.cs</Value>
+          <Value>[^a-z ]InputRouter.cs</Value>
+          <Value>[^a-z ]Stat.cs</Value>
+          <Value>[^a-z ]UnitController.cs</Value>
+          <Value>[^a-z ]UnitFactory.cs</Value>
+          <Value>[^a-z ]UnitModel.cs</Value>
+          <Value>[^a-z ]UnitView.cs</Value>
+          <Value>[^a-z ]Graph.cs</Value>
+          <Value>[^a-z ]Graph_old.cs</Value>
+          <Value>[^a-z ]Node.cs</Value>
+          <Value>[^a-z ]NodePath.cs</Value>
+          <Value>[^a-z ]Pathfinding.cs</Value>
+          <Value>[^a-z ]TilemapToGraph.cs</Value>
+          <Value>[^a-z ]AgentController.cs</Value>
+          <Value>[^a-z ]BaseGameEntity.cs</Value>
+          <Value>[^a-z ]MovingEntity.cs</Value>
+          <Value>[^a-z ]Steering.cs</Value>
+          <Value>[^a-z ]SteeringBehavior.cs</Value>
+          <Value>[^a-z ]SteeringObject.cs</Value>
+          <Value>[^a-z ]Vehicle.cs</Value>
+          <Value>[^a-z ]ReadOnlyAttribute.cs</Value>
+          <Value>[^a-z ]SceneTransitioner.cs</Value>
+          <Value>[^a-z ]AppNameText.cs</Value>
+          <Value>[^a-z ]DataManager.cs</Value>
+          <Value>[^a-z ]DisableParentOnClick.cs</Value>
+          <Value>[^a-z ]ExtensionMethods.cs</Value>
+          <Value>[^a-z ]KillZone.cs</Value>
+          <Value>[^a-z ]SceneNameText.cs</Value>
+          <Value>[^a-z ]Singleton.cs</Value>
+          <Value>[^a-z ]SingletonBehaviour.cs</Value>
+          <Value>[^a-z ]TextReplacer.cs</Value>
+          <Value>[^a-z ]Timer.cs</Value>
+          <Value>[^a-z ]Utilities.cs</Value>
+          <Value>[^a-z ]VersionText.cs</Value>
+          <Value>[^a-z ]CanvasElement.cs</Value>
+          <Value>[^a-z ]NineSquare.cs</Value>
+          <Value>[^a-z ]Rectangle.cs</Value>
+          <Value>[^a-z ]IStyleCopIgnoreUtilityView.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtility.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityData.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityDirectoryView.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityFileTreeView.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityFileView.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityPath.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityPrefs.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityWindow.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityXMLTool.cs</Value>
+          <Value>[^a-z ]IgnoredScriptWithErrors.cs</Value>
+          <Value>[^a-z ]ScriptWithErrors.cs</Value>
+          <Value>[^a-z ]ScriptWithNoErrors.cs</Value>
+        </CollectionProperty>
+      </ParserSettings>
+    </Parser>
+  </Parsers>
   <Analyzers>
     <Analyzer AnalyzerId="StyleCop.CSharp.DocumentationRules">
       <Rules>
@@ -91,97 +179,15 @@
         </CollectionProperty>
       </AnalyzerSettings>
     </Analyzer>
+    <Analyzer AnalyzerId="StyleCop.CSharp.ReadabilityRules">
+      <Rules>
+        <Rule Name="PrefixCallsCorrectly">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+      </Rules>
+      <AnalyzerSettings />
+    </Analyzer>
   </Analyzers>
-  <Parsers>
-    <Parser ParserId="StyleCop.CSharp.CsParser">
-      <ParserSettings>
-        <CollectionProperty Name="GeneratedFileFilters">
-          <Value>[^a-z ]RBPackageExporter.cs</Value>
-          <Value>[^a-z ]EasingFunctions.cs</Value>
-          <Value>[^a-z ]BuildAssetBundles.cs</Value>
-          <Value>[^a-z ]FileOperation.cs</Value>
-          <Value>[^a-z ]FolderOperation.cs</Value>
-          <Value>[^a-z ]UploadItch.cs</Value>
-          <Value>[^a-z ]OverrideDefines.cs</Value>
-          <Value>[^a-z ]ScriptRunner.cs</Value>
-          <Value>[^a-z ]ZipFileOperation.cs</Value>
-          <Value>[^a-z ]IPostBuildAction.cs</Value>
-          <Value>[^a-z ]IPostBuildPerPlatformAction.cs</Value>
-          <Value>[^a-z ]IPreBuildAction.cs</Value>
-          <Value>[^a-z ]IPreBuildPerPlatformAction.cs</Value>
-          <Value>[^a-z ]BuildActionListDrawer.cs</Value>
-          <Value>[^a-z ]BuildFilterDrawer.cs</Value>
-          <Value>[^a-z ]BuildAction.cs</Value>
-          <Value>[^a-z ]BuildActionList.cs</Value>
-          <Value>[^a-z ]BuildActionListUtility.cs</Value>
-          <Value>[^a-z ]BuildFilter.cs</Value>
-          <Value>[^a-z ]BuildPlatformDrawer.cs</Value>
-          <Value>[^a-z ]BuildPlatformListDrawer.cs</Value>
-          <Value>[^a-z ]BuildAndroid.cs</Value>
-          <Value>[^a-z ]BuildArchitecture.cs</Value>
-          <Value>[^a-z ]BuildIOS.cs</Value>
-          <Value>[^a-z ]BuildLinux.cs</Value>
-          <Value>[^a-z ]BuildOSX.cs</Value>
-          <Value>[^a-z ]BuildPC.cs</Value>
-          <Value>[^a-z ]BuildPlatform.cs</Value>
-          <Value>[^a-z ]BuildPlatformList.cs</Value>
-          <Value>[^a-z ]BuildVariant.cs</Value>
-          <Value>[^a-z ]BuildWebGL.cs</Value>
-          <Value>[^a-z ]BasicSettingsDrawer.cs</Value>
-          <Value>[^a-z ]BuildReleaseTypeDrawer.cs</Value>
-          <Value>[^a-z ]BuildReleaseTypeListDrawer.cs</Value>
-          <Value>[^a-z ]BuildSettingsEditor.cs</Value>
-          <Value>[^a-z ]ProductParametersDrawer.cs</Value>
-          <Value>[^a-z ]ProjectConfigurationsDrawer.cs</Value>
-          <Value>[^a-z ]SceneListDrawer.cs</Value>
-          <Value>[^a-z ]BaseSettings.cs</Value>
-          <Value>[^a-z ]BasicSettings.cs</Value>
-          <Value>[^a-z ]BuildDistribution.cs</Value>
-          <Value>[^a-z ]BuildDistributionList.cs</Value>
-          <Value>[^a-z ]BuildReleaseType.cs</Value>
-          <Value>[^a-z ]BuildReleaseTypeList.cs</Value>
-          <Value>[^a-z ]BuildSettings.cs</Value>
-          <Value>[^a-z ]Configuration.cs</Value>
-          <Value>[^a-z ]ProductParameters.cs</Value>
-          <Value>[^a-z ]ProjectConfigurations.cs</Value>
-          <Value>[^a-z ]SceneList.cs</Value>
-          <Value>[^a-z ]UnityBuildGUIUtility.cs</Value>
-          <Value>[^a-z ]UnityBuildWindow.cs</Value>
-          <Value>[^a-z ]BuildCLI.cs</Value>
-          <Value>[^a-z ]BuildProject.cs</Value>
-          <Value>[^a-z ]FilePathAttribute.cs</Value>
-          <Value>[^a-z ]FilePathDrawer.cs</Value>
-          <Value>[^a-z ]SerializableDictionary.cs</Value>
-          <Value>[^a-z ]BuildNotificationListDrawer.cs</Value>
-          <Value>[^a-z ]BuildNotification.cs</Value>
-          <Value>[^a-z ]BuildNotificationList.cs</Value>
-          <Value>[^a-z ]BuildConstantsGenerator.cs</Value>
-          <Value>[^a-z ]BuildConstants.cs</Value>
-          <Value>[^a-z ]IStyleCopIgnoreUtilityView.cs</Value>
-          <Value>[^a-z ]StyleCopIgnoreUtility.cs</Value>
-          <Value>[^a-z ]StyleCopIgnoreUtilityData.cs</Value>
-          <Value>[^a-z ]StyleCopIgnoreUtilityDirectoryView.cs</Value>
-          <Value>[^a-z ]StyleCopIgnoreUtilityFileTreeView.cs</Value>
-          <Value>[^a-z ]StyleCopIgnoreUtilityFileView.cs</Value>
-          <Value>[^a-z ]StyleCopIgnoreUtilityPath.cs</Value>
-          <Value>[^a-z ]StyleCopIgnoreUtilityPrefs.cs</Value>
-          <Value>[^a-z ]StyleCopIgnoreUtilityWindow.cs</Value>
-          <Value>[^a-z ]StyleCopIgnoreUtilityXMLTool.cs</Value>
-          <Value>[^a-z ]IgnoredScriptWithErrors.cs</Value>
-          <Value>[^a-z ]ScriptWithErrors.cs</Value>
-          <Value>[^a-z ]ScriptWithNoErrors.cs</Value>
-          <Value>[^a-z ]Bed.cs</Value>
-          <Value>[^a-z ]VendingMachine.cs</Value>
-          <Value>[^a-z ]Workstation.cs</Value>
-          <Value>[^a-z ]ButtonSequenceMiniGame.cs</Value>
-          <Value>[^a-z ]IMiniGame.cs</Value>
-          <Value>[^a-z ]SimpleInputMiniGame.cs</Value>
-          <Value>[^a-z ]GameFlowController.cs</Value>
-          <Value>[^a-z ]IInteractable.cs</Value>
-          <Value>[^a-z ]Interactor.cs</Value>
-          <Value>[^a-z ]OnTriggerDebug.cs</Value>
-        </CollectionProperty>
-      </ParserSettings>
-    </Parser>
-  </Parsers>
 </StyleCopSettings>
