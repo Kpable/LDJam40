@@ -32,3 +32,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# StyleCop local cache files
+*.Cache
+*.Cache.meta

@@ -1,0 +1,187 @@
+<StyleCopSettings Version="105">
+  <GlobalSettings>
+    <StringProperty Name="LinkedSettingsFile">IgnoreSourceFiles.StyleCop</StringProperty>
+    <CollectionProperty Name="RecognizedWords">
+      <Value>char</Value>
+      <Value>Enum</Value>
+      <Value>int</Value>
+      <Value>stackoverflow</Value>
+      <Value>var</Value>
+      <Value>webplayer</Value>
+      <Value>Anim</Value>
+      <Value>keyframe</Value>
+      <Value>keyframes</Value>
+      <Value>Raycast</Value>
+      <Value>verteces</Value>
+      <Value>Monobehavior</Value>
+      <Value>Monobehaviour</Value>
+      <Value>Monobehaviors</Value>
+      <Value>Monobehaviours</Value>
+      <Value>behaviour</Value>
+      <Value>behaviour's</Value>
+      <Value>Coroutine</Value>
+      <Value>Coroutines</Value>
+      <Value>Coroutine</Value>
+      <Value>unpause</Value>
+      <Value>unpauses</Value>
+      <Value>spritesheet</Value>
+      <Value>php</Value>
+    </CollectionProperty>
+    <BooleanProperty Name="ViolationsAsErrors">True</BooleanProperty>
+  </GlobalSettings>
+  <Analyzers>
+    <Analyzer AnalyzerId="StyleCop.CSharp.DocumentationRules">
+      <Rules>
+        <Rule Name="FileMustHaveHeader">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="FileHeaderMustShowCopyright">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="FileHeaderMustHaveCopyrightText">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="FileHeaderMustContainFileName">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="FileHeaderFileNameDocumentationMustMatchFileName">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="FileHeaderMustHaveValidCompanyText">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="FileHeaderFileNameDocumentationMustMatchTypeName">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="ElementDocumentationMustBeSpelledCorrectly">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+      </Rules>
+      <AnalyzerSettings>
+        <BooleanProperty Name="IgnorePrivates">True</BooleanProperty>
+        <BooleanProperty Name="IncludeFields">False</BooleanProperty>
+      </AnalyzerSettings>
+    </Analyzer>
+    <Analyzer AnalyzerId="StyleCop.CSharp.NamingRules">
+      <AnalyzerSettings>
+        <CollectionProperty Name="Hungarian">
+          <Value>ai</Value>
+          <Value>cs</Value>
+          <Value>fx</Value>
+          <Value>up</Value>
+          <Value>x</Value>
+          <Value>y</Value>
+          <Value>at</Value>
+        </CollectionProperty>
+      </AnalyzerSettings>
+    </Analyzer>
+  </Analyzers>
+  <Parsers>
+    <Parser ParserId="StyleCop.CSharp.CsParser">
+      <ParserSettings>
+        <CollectionProperty Name="GeneratedFileFilters">
+          <Value>[^a-z ]RBPackageExporter.cs</Value>
+          <Value>[^a-z ]EasingFunctions.cs</Value>
+          <Value>[^a-z ]BuildAssetBundles.cs</Value>
+          <Value>[^a-z ]FileOperation.cs</Value>
+          <Value>[^a-z ]FolderOperation.cs</Value>
+          <Value>[^a-z ]UploadItch.cs</Value>
+          <Value>[^a-z ]OverrideDefines.cs</Value>
+          <Value>[^a-z ]ScriptRunner.cs</Value>
+          <Value>[^a-z ]ZipFileOperation.cs</Value>
+          <Value>[^a-z ]IPostBuildAction.cs</Value>
+          <Value>[^a-z ]IPostBuildPerPlatformAction.cs</Value>
+          <Value>[^a-z ]IPreBuildAction.cs</Value>
+          <Value>[^a-z ]IPreBuildPerPlatformAction.cs</Value>
+          <Value>[^a-z ]BuildActionListDrawer.cs</Value>
+          <Value>[^a-z ]BuildFilterDrawer.cs</Value>
+          <Value>[^a-z ]BuildAction.cs</Value>
+          <Value>[^a-z ]BuildActionList.cs</Value>
+          <Value>[^a-z ]BuildActionListUtility.cs</Value>
+          <Value>[^a-z ]BuildFilter.cs</Value>
+          <Value>[^a-z ]BuildPlatformDrawer.cs</Value>
+          <Value>[^a-z ]BuildPlatformListDrawer.cs</Value>
+          <Value>[^a-z ]BuildAndroid.cs</Value>
+          <Value>[^a-z ]BuildArchitecture.cs</Value>
+          <Value>[^a-z ]BuildIOS.cs</Value>
+          <Value>[^a-z ]BuildLinux.cs</Value>
+          <Value>[^a-z ]BuildOSX.cs</Value>
+          <Value>[^a-z ]BuildPC.cs</Value>
+          <Value>[^a-z ]BuildPlatform.cs</Value>
+          <Value>[^a-z ]BuildPlatformList.cs</Value>
+          <Value>[^a-z ]BuildVariant.cs</Value>
+          <Value>[^a-z ]BuildWebGL.cs</Value>
+          <Value>[^a-z ]BasicSettingsDrawer.cs</Value>
+          <Value>[^a-z ]BuildReleaseTypeDrawer.cs</Value>
+          <Value>[^a-z ]BuildReleaseTypeListDrawer.cs</Value>
+          <Value>[^a-z ]BuildSettingsEditor.cs</Value>
+          <Value>[^a-z ]ProductParametersDrawer.cs</Value>
+          <Value>[^a-z ]ProjectConfigurationsDrawer.cs</Value>
+          <Value>[^a-z ]SceneListDrawer.cs</Value>
+          <Value>[^a-z ]BaseSettings.cs</Value>
+          <Value>[^a-z ]BasicSettings.cs</Value>
+          <Value>[^a-z ]BuildDistribution.cs</Value>
+          <Value>[^a-z ]BuildDistributionList.cs</Value>
+          <Value>[^a-z ]BuildReleaseType.cs</Value>
+          <Value>[^a-z ]BuildReleaseTypeList.cs</Value>
+          <Value>[^a-z ]BuildSettings.cs</Value>
+          <Value>[^a-z ]Configuration.cs</Value>
+          <Value>[^a-z ]ProductParameters.cs</Value>
+          <Value>[^a-z ]ProjectConfigurations.cs</Value>
+          <Value>[^a-z ]SceneList.cs</Value>
+          <Value>[^a-z ]UnityBuildGUIUtility.cs</Value>
+          <Value>[^a-z ]UnityBuildWindow.cs</Value>
+          <Value>[^a-z ]BuildCLI.cs</Value>
+          <Value>[^a-z ]BuildProject.cs</Value>
+          <Value>[^a-z ]FilePathAttribute.cs</Value>
+          <Value>[^a-z ]FilePathDrawer.cs</Value>
+          <Value>[^a-z ]SerializableDictionary.cs</Value>
+          <Value>[^a-z ]BuildNotificationListDrawer.cs</Value>
+          <Value>[^a-z ]BuildNotification.cs</Value>
+          <Value>[^a-z ]BuildNotificationList.cs</Value>
+          <Value>[^a-z ]BuildConstantsGenerator.cs</Value>
+          <Value>[^a-z ]BuildConstants.cs</Value>
+          <Value>[^a-z ]IStyleCopIgnoreUtilityView.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtility.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityData.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityDirectoryView.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityFileTreeView.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityFileView.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityPath.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityPrefs.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityWindow.cs</Value>
+          <Value>[^a-z ]StyleCopIgnoreUtilityXMLTool.cs</Value>
+          <Value>[^a-z ]IgnoredScriptWithErrors.cs</Value>
+          <Value>[^a-z ]ScriptWithErrors.cs</Value>
+          <Value>[^a-z ]ScriptWithNoErrors.cs</Value>
+          <Value>[^a-z ]Bed.cs</Value>
+          <Value>[^a-z ]VendingMachine.cs</Value>
+          <Value>[^a-z ]Workstation.cs</Value>
+          <Value>[^a-z ]ButtonSequenceMiniGame.cs</Value>
+          <Value>[^a-z ]IMiniGame.cs</Value>
+          <Value>[^a-z ]SimpleInputMiniGame.cs</Value>
+          <Value>[^a-z ]GameFlowController.cs</Value>
+          <Value>[^a-z ]IInteractable.cs</Value>
+          <Value>[^a-z ]Interactor.cs</Value>
+          <Value>[^a-z ]OnTriggerDebug.cs</Value>
+        </CollectionProperty>
+      </ParserSettings>
+    </Parser>
+  </Parsers>
+</StyleCopSettings>
