@@ -10,7 +10,18 @@ public class GameFlowController : MonoBehaviour
 {
     [SerializeField]
     private InGameClock inGameClock;
-    
+   
+    private DayState currentState = DayState.PreWork;
+
+    private enum DayState
+    {
+        PreWork,
+        Morning,
+        Lunch,
+        Afternoon,
+        PostWork
+    }
+
     /// <summary>
     /// Called first. 
     /// </summary>
