@@ -9,6 +9,9 @@ using UnityEngine.Events;
 /// </summary>
 public class GameFlowController : MonoBehaviour
 {
+    private const int ONESECONDSCALE = 1;
+    private const int FIVESECONDSCALE = 5;
+
     [SerializeField]
     private InGameClock inGameClock;
    
@@ -61,12 +64,6 @@ public class GameFlowController : MonoBehaviour
             return;
         }
 
-        // inGameClock.RegisterTimedCallback(new TimeSpan(0, 7, 0, 0), PreWork);
-        // inGameClock.RegisterTimedCallback(new TimeSpan(0, 8, 0, 0), Morning);
-        // inGameClock.RegisterTimedCallback(new TimeSpan(0, 12, 0, 0), Lunch);
-        // inGameClock.RegisterTimedCallback(new TimeSpan(0, 13, 0, 0), Afternoon);
-        //// inGameClock.RegisterTimedCallback(new TimeSpan(0, 17, 0, 0), PostWork);
-
         inGameClock.RegisterTimedCallback(new TimeSpan(0, 7, 0, 0), () => { ChangeState(DayState.PreWork); });
         inGameClock.RegisterTimedCallback(new TimeSpan(0, 8, 0, 0), () => { ChangeState(DayState.Morning); });
         inGameClock.RegisterTimedCallback(new TimeSpan(0, 12, 0, 0), () => { ChangeState(DayState.Lunch); });
@@ -84,17 +81,22 @@ public class GameFlowController : MonoBehaviour
         {
             case DayState.PreWork:
                 Debug.Log("Its pre work time!");
+                inGameClock.InGameMinutesPerRealtimeSeconds = ONESECONDSCALE;
                 break;
             case DayState.Morning:
+                inGameClock.InGameMinutesPerRealtimeSeconds = FIVESECONDSCALE;
                 Debug.Log("Its morning time!");
                 break;
             case DayState.Lunch:
+                inGameClock.InGameMinutesPerRealtimeSeconds = ONESECONDSCALE;
                 Debug.Log("Its lunch time!");
                 break;
             case DayState.Afternoon:
+                inGameClock.InGameMinutesPerRealtimeSeconds = FIVESECONDSCALE;
                 Debug.Log("Its noon time!");
                 break;
             case DayState.PostWork:
+                inGameClock.InGameMinutesPerRealtimeSeconds = ONESECONDSCALE;
                 Debug.Log("Its after work time!");
                 break;
             default:

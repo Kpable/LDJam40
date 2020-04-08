@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Menu.
+/// Base Menu.
 /// </summary>
 public class Menu : MonoBehaviour
 {
