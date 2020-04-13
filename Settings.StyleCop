@@ -94,7 +94,6 @@
           <Value>[^a-z ]Singleton.cs</Value>
           <Value>[^a-z ]SingletonBehaviour.cs</Value>
           <Value>[^a-z ]TextReplacer.cs</Value>
-          <Value>[^a-z ]Timer.cs</Value>
           <Value>[^a-z ]Utilities.cs</Value>
           <Value>[^a-z ]VersionText.cs</Value>
           <Value>[^a-z ]CanvasElement.cs</Value>
