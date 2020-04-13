@@ -76,7 +76,6 @@ MonoBehaviour:
   - relativePath: /Assets/KLib/Utilities/Singleton.cs
   - relativePath: /Assets/KLib/Utilities/SingletonBehaviour.cs
   - relativePath: /Assets/KLib/Utilities/TextReplacer.cs
-  - relativePath: /Assets/KLib/Utilities/Timer.cs
   - relativePath: /Assets/KLib/Utilities/Utilities.cs
   - relativePath: /Assets/KLib/Utilities/VersionText.cs
   - relativePath: /Assets/KLib/Views/CanvasElement.cs
